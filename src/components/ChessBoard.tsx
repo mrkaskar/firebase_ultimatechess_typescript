@@ -3,10 +3,13 @@ import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
 import UserArea from './UserArea';
 import useValidator from './useValidator';
-
+import Chess, {ChessInstance} from 'chess.js';
+//@ts-ignore
+import Stockfish from './Stockfish';
+//@ts-ignore
+const game: ChessInstance = new Chess();
 function ChessBoard(){
     const { 
-         position,
          onDrop,
          onMouseOverSquare, 
          onMouseOutSquare,
@@ -15,7 +18,7 @@ function ChessBoard(){
          dropStyle,
          squareStyles
          
-        } = useValidator(); 
+        } = useValidator(game); 
     const [width, setWidth] = React.useState<number>(window.innerWidth);
 
     React.useEffect(()=>{
@@ -33,7 +36,9 @@ function ChessBoard(){
     <>
     <UserArea avatar="/processor.jpg" username="Stockfish" />
     <div id="board-wrapper">
-        <Chessboard 
+        <Stockfish game={game} player="white">
+            {({position, onDrop}: {position:string, onDrop: ()=>void}) => (
+                <Chessboard 
         id="humanvshuman"
         boardStyle={boardStyle} 
         calcWidth={resizeBoard} 
@@ -47,6 +52,9 @@ function ChessBoard(){
         dropSquareStyle={dropStyle}
         transitionDuration={300}
         />
+            )} 
+        </Stockfish>
+        
     </div>
     <UserArea avatar="/icon-72x72.png" username="User" />
    </> 

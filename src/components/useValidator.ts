@@ -1,7 +1,6 @@
 import React from "react";
-import  Chess, {ChessInstance, Square} from "chess.js";
-
-let game:ChessInstance;
+import { ChessInstance, Square} from "chess.js";
+//@ts-ignore
 
     function squareStyling ({ pieceSquare, history }:{pieceSquare: Square, history: any})  {
     const sourceSquare = history.length && history[history.length - 1].from;
@@ -22,22 +21,15 @@ let game:ChessInstance;
     };
   };
   
-
-     
-
-const useValidator = () => {
-   const [fen, setFen] = React.useState<string>("start");
+  const useValidator = (game: ChessInstance) => {
+    
+    const [fen, setFen] = React.useState<string>("start");
    const [dropStyle, setDropStyle] = React.useState({});
    const [squareStyles, setSquareStyles] = React.useState({});
    //@ts-ignore
    const [pieceSquare, setPieceSquare] = React.useState<Square>('');
    const [history, setHistory] = React.useState<any>([]);
-   
-   React.useEffect(()=>{
-       //@ts-ignore
-        game = new Chess();       
-   },[])
-   
+    
    
    const removeHighlightSquare = ()  => {
        setSquareStyles(squareStyling({ pieceSquare, history}))
