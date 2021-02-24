@@ -1,0 +1,10 @@
+#board-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* height: 100vh; */
+}
+b{
+    background-color: rgb(red, rgba(44, 230, 44, 0.219), blue);
+}

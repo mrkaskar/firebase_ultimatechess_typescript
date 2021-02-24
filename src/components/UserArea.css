@@ -1,0 +1,15 @@
+.user-area{
+    margin: 0 auto;
+    width: 650px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+.avatar-img{
+    border-radius: 50%;
+    width: 40px;
+    
+}
+.avatar{
+    margin-right: 10px;
+}
