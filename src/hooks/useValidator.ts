@@ -21,9 +21,8 @@ import { ChessInstance, Square} from "chess.js";
     };
   };
   
-  const useValidator = (game: ChessInstance) => {
+  const useValidator = (game: ChessInstance, fen: string, setFen:React.Dispatch<React.SetStateAction<string>>) => {
     
-    const [fen, setFen] = React.useState<string>("start");
    const [dropStyle, setDropStyle] = React.useState({});
    const [squareStyles, setSquareStyles] = React.useState({});
    //@ts-ignore
@@ -73,7 +72,7 @@ import { ChessInstance, Square} from "chess.js";
    }
 
    const onMouseOverSquare = (square: Square)  => {
-
+    
     let moves = game.moves({
         square: square,
         verbose: true
@@ -109,7 +108,6 @@ import { ChessInstance, Square} from "chess.js";
             promotion: "q"
         });
         if(move === null) return;
-        
         setFen(game.fen());
         setHistory(game.history({verbose: true})) 
         //@ts-ignore

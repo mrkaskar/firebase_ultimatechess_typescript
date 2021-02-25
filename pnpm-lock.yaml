@@ -8,6 +8,7 @@ dependencies:
   '@types/react-dom': 17.0.1
   chess.js: 0.10.2
   chessboardjsx: 2.4.2_react-dom@17.0.1+react@17.0.1
+  js-chess-engine: 0.6.1
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   react-scripts: 4.0.3_react@17.0.1+typescript@4.1.5
@@ -7248,6 +7249,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-jxTmrvuecVISvKFFhOkjsWRZV7sFqdSUAd1ajOKY+/QE/aLBVstsJ/dX8GczLzwiT6ZEwwmZqtCUHLHHQVzcfA==
+  /js-chess-engine/0.6.1:
+    dev: false
+    resolution:
+      integrity: sha512-agDyOiM81Rv9EWkoSfOUGRE64IH+RFC9AZwRC1GBwugxF17xWW9y4/9Tbn8XnKhLaU4z0g9j6x+RcBBhLKDWOQ==
   /js-tokens/4.0.0:
     dev: false
     resolution:
@@ -12427,6 +12432,7 @@ specifiers:
   '@types/react-dom': ^17.0.0
   chess.js: 0.10.2
   chessboardjsx: ^2.4.2
+  js-chess-engine: ^0.6.1
   react: ^17.0.1
   react-dom: ^17.0.1
   react-scripts: 4.0.3

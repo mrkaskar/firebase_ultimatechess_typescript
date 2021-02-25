@@ -3,31 +3,23 @@ import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
 import UserArea from './UserArea';
 import useValidator from '../hooks/useValidator';
-import {ChessInstance, Square} from 'chess.js';
+import Chess, {ChessInstance} from 'chess.js';
 
-interface ChessBoardProps {
-    game: ChessInstance, 
-    fen: string, 
-    setFen:React.Dispatch<React.SetStateAction<string>>,
-    position: string , 
-    onDropOption: ({ sourceSquare, targetSquare }: { sourceSquare: Square; targetSquare: Square; }) => void, 
-    options:Boolean 
-}
+//@ts-ignore
+const game: ChessInstance = new Chess();
+function BotChessBoard(){
 
-function ChessBoard({
-   game, fen, setFen, position = "start", onDropOption, options = false 
-}: ChessBoardProps
-    ){
+  const [fen, setFen] = React.useState("start");
+  
     const { 
          onMouseOverSquare, 
          onMouseOutSquare,
          onDragOverSquare, 
          onSquareClick,
          dropStyle,
-         squareStyles,
-         onDrop
+         squareStyles
+         
         } = useValidator(game, fen, setFen); 
-
     const [width, setWidth] = React.useState<number>(window.innerWidth);
 
     React.useEffect(()=>{
@@ -50,14 +42,13 @@ function ChessBoard({
     }
     return (
     <>
-    <UserArea avatar="/processor.jpg" username="Computer" />
+    <UserArea avatar="/processor.jpg" username="Bot" />
     <div id="board-wrapper">
                 <Chessboard 
         id="humanvshuman"
         boardStyle={boardStyle} 
         calcWidth={resizeBoard} 
-        position={position}
-        onDrop={options ? onDropOption : onDrop}
+        position="start"
         onMouseOverSquare={onMouseOverSquare}
         onMouseOutSquare={onMouseOutSquare} 
         onDragOverSquare={onDragOverSquare}
@@ -74,4 +65,4 @@ function ChessBoard({
     )
 }
 
-export default ChessBoard;
+export default BotChessBoard;
