@@ -65,7 +65,7 @@ import { ChessInstance, Square} from "chess.js";
     });
     
     if(move === null) return;
-    
+   
     setFen(game.fen());
     setHistory(game.history({verbose: true})) 
     setSquareStyles(squareStyling({ pieceSquare, history}))

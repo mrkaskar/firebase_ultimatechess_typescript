@@ -23,9 +23,7 @@ function useStockfish(game: ChessInstance, player: string, fen: string, setFen: 
   React.useEffect(() => {
     if (fen !== "start" && engineColor.current[0] === game.turn()) {
       prepare();
-      console.log("Engine working");
     } else {
-      console.log("Engine finished thinking");
     }
   }, [fen,game]);
 
