@@ -1,7 +1,6 @@
 import React from 'react';
 import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
-import UserArea from './UserArea';
 import useValidator from '../hooks/useValidator';
 import {ChessInstance, Square} from 'chess.js';
 

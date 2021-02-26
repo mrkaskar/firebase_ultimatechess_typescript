@@ -15,6 +15,9 @@
     left: 2px; 
 
 }
+.comp{
+  top: 0.5px;
+}
 .avatar{
     margin-right: 10px;
     position: relative;
@@ -88,4 +91,27 @@
   .showThinking{
       opacity: 1;
       transition-delay: 0.3s;
+  }
+  
+  .captured {
+    width: 300px;
+    height: 50px;
+    margin-left: 10px;
+  }
+  
+  .cap-piece {
+    float: left;
+    background-color: rgb(255, 254, 254);
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-right: 1px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cap-piece img{
+    width: 20px;
   }

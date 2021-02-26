@@ -3,15 +3,25 @@ import useBot from "../hooks/useBot";
 import Chess, {ChessInstance} from 'chess.js';
 import ChessBoard from './ChessBoard';
 import UserArea from './UserArea';
+import useCaptured from '../hooks/useCaptured';
 //@ts-ignore
 const game: ChessInstance = new Chess();
 
 const BotChessBoard = () => {
+   
    const [fen, setFen] = React.useState<string>("start");
    const {onDrop} = useBot(fen, setFen, 2, game, "white");
+   const {whiteCaptured, blackCaptured} = useCaptured(game.history({verbose: true}), fen);
+   
    return (
   <> 
-   <UserArea avatar="/img/bots/alex.png" username="Alex" turn={game.turn()} color="b"/>
+   <UserArea 
+   avatar="/img/bots/alex.png" 
+   username="Alex" turn={game.turn()} 
+   color="b" 
+   computer={true}
+   capturedPieces={whiteCaptured}
+   />
    <ChessBoard
     game={game}
     fen={fen}
@@ -20,7 +30,15 @@ const BotChessBoard = () => {
     onDropOption={onDrop}
     options={true}
    />
-   <UserArea avatar="/icon-72x72.png" username="Super User" turn={game.turn()} color="w"/>
+   <UserArea 
+   avatar="/icon-72x72.png" 
+   username="Super User" 
+   turn={game.turn()} 
+   color="w"
+   computer={false}
+   capturedPieces={blackCaptured}
+   />
+
    </>
    )
 }
