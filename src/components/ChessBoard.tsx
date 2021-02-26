@@ -50,7 +50,6 @@ function ChessBoard({
     }
     return (
     <>
-    <UserArea avatar="/processor.jpg" username="Computer" />
     <div id="board-wrapper">
                 <Chessboard 
         id="humanvshuman"
@@ -65,10 +64,11 @@ function ChessBoard({
         squareStyles={squareStyles}
         dropSquareStyle={dropStyle}
         transitionDuration={300}
+        darkSquareStyle={{backgroundColor:'#018a6c'}}
+        lightSquareStyle={{backgroundColor:'#bdeaf5'}}
         />
         
     </div>
-    <UserArea avatar="/icon-72x72.png" username="User" />
     <button onClick={undoMove}>Undo</button>
    </> 
     )

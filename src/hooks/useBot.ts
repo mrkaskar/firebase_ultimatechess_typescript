@@ -17,6 +17,8 @@ const useBot = (
   React.useEffect(() => {
     let timeout: NodeJS.Timeout; 
     if (engineColor.current[0] === game.turn() && fen !== "start") {
+      console.log("Engine start thinking");
+      
       timeout = setTimeout(()=>{
         //@ts-ignore
         let from: Square = "";
@@ -37,6 +39,7 @@ const useBot = (
     
         if (move === null) return;
         setFen(game.fen());
+        console.log("engine moved!")
           
         },50);
     }
