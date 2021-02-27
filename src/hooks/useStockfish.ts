@@ -21,7 +21,7 @@ function useStockfish(game: ChessInstance, player: string, fen: string, setFen: 
   }, [game, player, setFen]);
 
   React.useEffect(() => {
-    if (fen !== "start" && engineColor.current[0] === game.turn()) {
+    if (fen !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" && engineColor.current[0] === game.turn()) {
       prepare();
     } else {
     }

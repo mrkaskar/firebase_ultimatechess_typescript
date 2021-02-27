@@ -1,0 +1,32 @@
+#navbar{
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 8px;
+    background-color: rgba(255, 255, 255, 0.24);
+    height: 50px;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+#view{
+    color: white !important;
+    width: 20px;
+    padding: 20px;
+}
+
+#view:hover{
+    cursor: pointer;
+}
+
+#nav-wrapper{
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#title{
+    display: inline-block;
+    margin: 0 auto;
+}

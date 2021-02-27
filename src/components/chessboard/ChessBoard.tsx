@@ -1,8 +1,17 @@
 import React from 'react';
 import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
-import useValidator from '../hooks/useValidator';
+import useValidator from '../../hooks/useValidator';
 import {ChessInstance, Square} from 'chess.js';
+import Modal from '../utils/modal/Modal';
+import useStatus from '../../hooks/useStatus';
+
+interface User {
+    username: string;
+    avatar: string;
+    computer: boolean;
+    color: string;
+}
 
 interface ChessBoardProps {
     game: ChessInstance, 
@@ -10,11 +19,12 @@ interface ChessBoardProps {
     setFen:React.Dispatch<React.SetStateAction<string>>,
     position: string , 
     onDropOption: ({ sourceSquare, targetSquare }: { sourceSquare: Square; targetSquare: Square; }) => void, 
-    options:Boolean 
+    options:Boolean ,
+    orientation: "white" | "black",
 }
 
 function ChessBoard({
-   game, fen, setFen, position = "start", onDropOption, options = false 
+   game, fen, setFen, position = "start", onDropOption, options = false, orientation
 }: ChessBoardProps
     ){
     const { 
@@ -34,7 +44,7 @@ function ChessBoard({
             setWidth(window.innerWidth);
        }
     },[])
-
+    
     const resizeBoard = () =>  width < 700 ? width - 10: 600;
     const boardStyle = { 
         borderRadius: "5px",
@@ -49,6 +59,7 @@ function ChessBoard({
     }
     return (
     <>
+
     <div id="board-wrapper">
                 <Chessboard 
         id="humanvshuman"
@@ -65,6 +76,7 @@ function ChessBoard({
         transitionDuration={300}
         darkSquareStyle={{backgroundColor:'#018a6c'}}
         lightSquareStyle={{backgroundColor:'#bdeaf5'}}
+        orientation={orientation}
         />
         
     </div>

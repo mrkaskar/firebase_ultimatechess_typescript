@@ -57,7 +57,7 @@ import { ChessInstance, Square} from "chess.js";
       setSquareStyles({...squareStyles, ...highlightStyles})
    }
    const onDrop = ({sourceSquare, targetSquare}:{sourceSquare: Square, targetSquare: Square}) => {
-       
+     if(game.game_over()) return;
     let move = game.move({
         from: sourceSquare,
         to: targetSquare,
