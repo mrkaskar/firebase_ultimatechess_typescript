@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
           <NavBar />
-          <HumanChessBoard orentationBoard="black" />
+          {/* <HumanChessBoard orentationBoard="black" /> */}
       {/* <StockfishBoard orentationBoard="black"/> */}
-      {/* <BotChessBoard orentationBoard="black"/>  */}
+      <BotChessBoard orentationBoard="black"/> 
     </div>
   );
 }

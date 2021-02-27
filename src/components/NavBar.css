@@ -1,20 +1,22 @@
 #navbar{
     width: 90%;
-    max-width: 500px;
     margin: 0 auto;
     margin-top: 8px;
-    background-color: rgba(255, 255, 255, 0.24);
+    background-color: rgb(1, 138, 108);
     height: 50px;
     box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
     display: flex;
-    align-items: center;
     border-radius: 8px;
 }
+
 #view{
     color: white !important;
     width: 20px;
     padding: 20px;
+    transition: 0.5s;
+    margin-top: -10px;
 }
+
 
 #view:hover{
     cursor: pointer;
@@ -22,11 +24,53 @@
 
 #nav-wrapper{
     display: flex;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 #title{
     display: inline-block;
     margin: 0 auto;
+    transition: 0.5s;
+    line-height: 50px;
+}
+
+#subnav{
+    background-color: rgba(1, 138, 108, 0.486);
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 3px;
+    margin-top: -10px;
+    max-width: 500px;
+    padding-top: 20px;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 200px;
+    transform: translateY(-100px);
+    transition: 0.5s;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    z-index: 10;
+    padding-bottom: 10px;
+}
+.spread{
+   visibility: visible !important;
+   opacity: 1 !important;
+    transform: translateY(0px) !important;
+}
+
+.menu-item{
+    background-color: rgb(1, 37, 29);
+    padding: 10px;
+    width: 150px;
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-top: 5px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    color: white;
+
+}
+.menu-item:hover{
+    cursor: pointer;
 }
