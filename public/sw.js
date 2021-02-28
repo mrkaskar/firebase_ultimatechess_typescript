@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const staticCacheName = "site-static-v1";
+const staticCacheName = "site-static-v2";
 
 const assets = [
   "/",
@@ -30,6 +30,10 @@ const assets = [
   "/img/svg/king.svg",
   "/img/svg/rook.svg",
   "icon-72x72.png",
+  "/static/css/main.f7edd3e3.chunk.css",
+  "/static/js/2.716918dd.chunk.js",
+  "/static/js/main.a3bd94e6.chunk.js",
+  "app.js",
 ];
 
 self.addEventListener("install", (evt) => {
