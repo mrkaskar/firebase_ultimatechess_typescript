@@ -33,7 +33,6 @@ const useCaptured = (history: Move[], fen: string) => {
        }
         if(history.length > 0){
          const lastMove = history[history.length-1];
-         console.log(lastMove)
            if(lastMove.captured){
               let capturedColor = lastMove.color === "w" ? "b" : "w";
               let capturedPiece = lastMove.captured;
