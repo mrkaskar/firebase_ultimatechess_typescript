@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-globals */
-const staticCacheName = "site-static-v2";
+const staticCacheName = "site-static-v3";
 
 const assets = [
   "/",
   "stockfish.js",
+  "botworker.js",
   "/index.html",
   "/img/pieces/bb.png",
   "/img/pieces/bk.png",
