@@ -10,3 +10,15 @@
 b{
     background-color: rgb(red, rgba(44, 230, 44, 0.219), blue);
 }
+#undo{
+    width: 30px;
+    height: 30px;
+    border: none;
+    font-size: 1.4rem;
+    color: white;
+    background-color: rgb(80, 80, 80);
+}
+#undo:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}

@@ -4,20 +4,20 @@ import chessEngine from "../lib/chessEngine";
 
 let prepare:()=>void;
 
-function useStockfish(game: ChessInstance, player: string, fen: string, setFen: React.Dispatch<React.SetStateAction<string>>) {
+function useStockfish(game: ChessInstance, player: string, fen: string, setFen: React.Dispatch<React.SetStateAction<string>>,level: number) {
   const engineColor = React.useRef<"white"|"black">("white");
   React.useEffect(() => {
-    const { prepareMove, setSkillLevel, setAggressiveness } = chessEngine(
+    const { prepareMove, setSkillLevel } = chessEngine(
       player,
       game,
       {},
       setFen
     );
-    setSkillLevel(0);
-    setAggressiveness(100);
+    setSkillLevel(level);
     engineColor.current = player === "white" ? "black" : "white";
     prepare = prepareMove;
     prepare();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game, player, setFen]);
 
   React.useEffect(() => {

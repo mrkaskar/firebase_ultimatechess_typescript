@@ -6,12 +6,6 @@ const useCaptured = (history: Move[], fen: string) => {
     const [blackCaptured, setBlackCaptured] = React.useState<string[]>([]);
     const [currentHistory, setCurrentHistory] = React.useState<Move[]>([]);
     const [historyLen, setHistoryLen] = React.useState(0);
-
-    React.useEffect(()=>{
-       if(history.length !== currentHistory.length){
-          console.log("User is undoing!")
-       }
-    },[currentHistory]) 
     
     React.useEffect(()=>{
        setHistoryLen(history.length);
@@ -22,9 +16,10 @@ const useCaptured = (history: Move[], fen: string) => {
          let undoMoves = [...currentHistory].splice(-2);
          for(let move of undoMoves){
             if(move.captured){
-               if(move.color === "w"){
+               if(move.color === "b"){
                 let white = [...whiteCaptured];
                 white.pop();
+                console.log(white)
                 setWhiteCaptured(white);
                }
                else{
@@ -34,9 +29,11 @@ const useCaptured = (history: Move[], fen: string) => {
                }
             }
          }
+         return;
        }
         if(history.length > 0){
          const lastMove = history[history.length-1];
+         console.log(lastMove)
            if(lastMove.captured){
               let capturedColor = lastMove.color === "w" ? "b" : "w";
               let capturedPiece = lastMove.captured;

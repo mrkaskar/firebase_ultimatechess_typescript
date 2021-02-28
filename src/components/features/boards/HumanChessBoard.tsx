@@ -5,7 +5,6 @@ import ChessBoard from '../../chessboard/ChessBoard';
 import UserArea from '../users/UserArea';
 import useCaptured from '../../../hooks/useCaptured';
 import useStatus from '../../../hooks/useStatus'
-import useOrentation from '../../../hooks/useOrentation';
 import Modal from '../../utils/modal/Modal';
 import useModal from '../../../hooks/useModal';
 //@ts-ignore
@@ -17,9 +16,9 @@ const HumanChessBoard = ({orentationBoard}: HumanChessBoardProps) => {
    
    const [fen, setFen] = React.useState<string>("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
    const {whiteCaptured, blackCaptured} = useCaptured(game.history({verbose: true}), fen);
-   let blackUser = { username: "User", avatar: "/img/bots/alex.png", computer: false, color: "b" ,capturedPieces: whiteCaptured};
-   let whiteUser = { username: "Alex", avatar: "/img/bots/alex.png", computer: true, color: "w",capturedPieces: blackCaptured};
-   const [user1, user2] = useOrentation(orentationBoard,blackUser,whiteUser);
+   let user1 = { username:"someone", avatar: `/img/bots/.png`, computer: false, color: "b" ,capturedPieces: whiteCaptured};
+   let user2 = { username: "anotherone", avatar: `/img/bots/.png`, computer: true, color: "w",capturedPieces: blackCaptured};
+
    const {checkMate, draw} = useStatus(game, fen);
    const {showModal, setShowModal,modalContent} = useModal(checkMate, draw, user2, game.turn() !== orentationBoard[0]);
    return (

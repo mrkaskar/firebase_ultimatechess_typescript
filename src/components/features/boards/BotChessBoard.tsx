@@ -4,7 +4,6 @@ import Chess, {ChessInstance} from 'chess.js';
 import ChessBoard from '../../chessboard/ChessBoard';
 import UserArea from '../users/UserArea';
 import useCaptured from '../../../hooks/useCaptured';
-import useOrentation from '../../../hooks/useOrentation';
 import useStatus from '../../../hooks/useStatus';
 import useModal from '../../../hooks/useModal';
 import Modal from '../../utils/modal/Modal';
@@ -13,16 +12,30 @@ const game: ChessInstance = new Chess();
 
 interface BotChessBoardProps {
   orentationBoard: 'white' | 'black'; 
+  user: { username: string, avatar: string},
+  bot: { name: string, botlevel: number}
 }
-const BotChessBoard = ({orentationBoard}: BotChessBoardProps) => {
-   
+const BotChessBoard = ({orentationBoard, user, bot}: BotChessBoardProps) => {
    const [fen, setFen] = React.useState<string>("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-   const {onDrop} = useBot(fen, setFen, 2, game, orentationBoard);
+   const {onDrop} = useBot(fen, setFen, bot.botlevel, game, orentationBoard);
    const {whiteCaptured, blackCaptured} = useCaptured(game.history({verbose: true}), fen);
 
-   let blackUser = { username: "User", avatar: "/img/bots/alex.png", computer: false, color: "b" ,capturedPieces: whiteCaptured};
-   let whiteUser = { username: "Alex", avatar: "/img/bots/alex.png", computer: true, color: "w",capturedPieces: blackCaptured};
-   const [user1, user2] = useOrentation(orentationBoard,blackUser,whiteUser);
+   let userColor = orentationBoard[0];
+   let botColor = userColor === "w" ? "b" : "w";
+
+   let user1 = { username: bot.name,
+    avatar: `/img/bots/${bot.name}.png`, 
+    computer: true, 
+    color: botColor ,
+    capturedPieces: botColor === "w" ? blackCaptured : whiteCaptured};
+
+   let user2 = { username: user.username, 
+   avatar:user.avatar, 
+   computer: false, 
+   color: userColor,
+   capturedPieces: userColor === "w" ? blackCaptured : whiteCaptured};
+   
+    
 
    const {checkMate, draw} = useStatus(game, fen);
    const {showModal, setShowModal,modalContent} = useModal(checkMate, draw, user2, game.turn() !== orentationBoard[0]);
@@ -49,7 +62,6 @@ const BotChessBoard = ({orentationBoard}: BotChessBoardProps) => {
    finish={game.game_over()} 
    {...user2}
    />
-
    </>
    )
 }

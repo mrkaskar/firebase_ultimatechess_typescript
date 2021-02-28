@@ -48,7 +48,7 @@
     height: 100%;
     border-radius: 10px;
     transition: 0.5s;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.062);
 }
 .game-card:hover{
     box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
@@ -70,4 +70,9 @@
     margin: 0 auto;
     box-shadow: 0 4px 5px 0 rgba(248, 245, 245, 0.14), 0 1px 10px 0 rgba(250, 250, 250, 0.12), 0 2px 4px -1px rgba(255, 251, 251, 0.2);
     margin-bottom: 27px;
+}
+
+a{
+    color: white;
+    text-decoration: none;
 }

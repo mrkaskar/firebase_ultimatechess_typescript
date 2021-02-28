@@ -3,15 +3,6 @@ import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
 import useValidator from '../../hooks/useValidator';
 import {ChessInstance, Square} from 'chess.js';
-import Modal from '../utils/modal/Modal';
-import useStatus from '../../hooks/useStatus';
-
-interface User {
-    username: string;
-    avatar: string;
-    computer: boolean;
-    color: string;
-}
 
 interface ChessBoardProps {
     game: ChessInstance, 
@@ -73,14 +64,14 @@ function ChessBoard({
         onSquareClick={onSquareClick}
         squareStyles={squareStyles}
         dropSquareStyle={dropStyle}
-        transitionDuration={300}
+        transitionDuration={200}
         darkSquareStyle={{backgroundColor:'#018a6c'}}
         lightSquareStyle={{backgroundColor:'#bdeaf5'}}
         orientation={orientation}
         />
         
     </div>
-    <button onClick={undoMove}>Undo</button>
+    <button id="undo" onClick={undoMove}>↩</button>
    </> 
     )
 }

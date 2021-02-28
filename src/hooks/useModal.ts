@@ -42,6 +42,7 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean) => {
            }
            setModalContent(status);
        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[checkMate, draw])
     
     return {

@@ -1,20 +1,19 @@
 import React from "react";
 import "./Home.css";
 import GameCard from './GameCard';
+import {Link} from 'react-router-dom';
+import HomeNav  from './Homenav';
+
 
 const Home = () => {
   return (
   <>
-    <div id="homenav">
-    <div style={{display:'flex', alignItems:'center'}}>
-       <img src="icon-72x72.png" alt="guest" id="useravatar"/> 
-       <span id="username">Guest</span>
-    </div>
-       <h3>Alpha Chess</h3>
-    </div>
+  <HomeNav/>
     <div id="homegrid">
       <div className="grid">
+      <Link to="/computer">
         <GameCard img="bishop" show="Computer"/> 
+      </Link>
       </div>
       <div className="grid">
         <GameCard img="blackqueen" show="Create Game"/> 

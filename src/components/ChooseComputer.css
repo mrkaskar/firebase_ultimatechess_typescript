@@ -1,0 +1,118 @@
+#bots{
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    max-width: 480px;
+    /* background-color: aqua; */
+}
+.botimg{
+    width: 50px;
+    margin-bottom: 8px;
+
+}
+.bot{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    margin: 0 auto;
+    height: 230px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+    border-radius: 8px;
+    background-color: rgba(250, 250, 250, 0.13);
+}
+.des{
+    background-color: rgba(0, 0, 0, 0.26);
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 8px;
+    line-height: 22px;
+}
+.bot:hover{
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+    background-color: rgba(255, 255, 255, 0.212);
+    cursor: pointer;
+}
+
+#backdrop{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.884);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#chosenInfo{
+    width: 350px;
+    height: 400px;
+    background-color: rgba(2, 38, 65, 0.904);
+    border-radius: 8px;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+    transform: scale(1);
+    animation: pop 0.3s;
+}
+.show{
+   display: flex !important; 
+}
+@keyframes pop {
+   0%{
+       transform: scale(0);
+   } 
+   100%{
+       transform: scale(1);
+   }
+
+}
+#chosenInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+.botimgchoose{
+    width: 90px;
+    margin-bottom: 8px;
+}
+
+#choice h1 {
+    display: inline-block;
+    margin: 5px;
+}
+#choice h1:hover{
+    cursor:pointer ;
+}
+.choice{
+    color: greenyellow
+}
+
+.btn{
+    border: none;
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    font-weight:bold;
+    font-size: 1.2rem;
+}
+    
+.btn:active{
+   outline: none; 
+}
+.success{
+    background-color: greenyellow;
+    color: black !important;
+}
+.danger{
+    background-color: brown;
+    color: white;
+}
