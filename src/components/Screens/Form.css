@@ -1,0 +1,78 @@
+#register-panel{
+    margin: 0 auto;
+    max-width: 600px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.123);
+    border-radius: 15px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+
+    
+}
+
+@media (max-width: 500px){
+    #register-panel{
+        max-width: 480px;
+    }
+}
+
+.formEle{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.062);
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px
+}
+.input{
+    border: none;
+    color:white;
+    background-color:rgba(255, 255, 255, 0.027);
+    padding: 6px 10px 6px 10px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.input:focus{
+    outline: none;
+}
+
+.fbtn{
+    border: none;
+    padding: 8px 8px 8px 8px;
+    margin-top: 30px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.158);
+    color:white
+}
+.fbtn:focus{
+    outline: none;
+}
+.fbtn:active{
+    transform: scale(1.05);
+}
+
+#google{
+    padding-top: 50px;
+}
+
+#gbtn{
+    background-color: #f33333;
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+#gbtn:hover{
+    background-color: #6c9ef0;
+    cursor: pointer;
+}
+
+.error {
+    color: rgb(255, 102, 0);
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+}

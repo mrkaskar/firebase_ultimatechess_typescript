@@ -17,9 +17,9 @@ interface BotChessBoardProps {
 }
 const BotChessBoard = ({orentationBoard, user, bot}: BotChessBoardProps) => {
    const [fen, setFen] = React.useState<string>("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+   console.log(bot.botlevel);
    const {onDrop} = useBot(fen, setFen, bot.botlevel, game, orentationBoard);
    const {whiteCaptured, blackCaptured} = useCaptured(game.history({verbose: true}), fen);
-
    let userColor = orentationBoard[0];
    let botColor = userColor === "w" ? "b" : "w";
 

@@ -12,10 +12,11 @@ interface ChessBoardProps {
     onDropOption: ({ sourceSquare, targetSquare }: { sourceSquare: Square; targetSquare: Square; }) => void, 
     options:Boolean ,
     orientation: "white" | "black",
+    botmatch?: boolean,
 }
 
 function ChessBoard({
-   game, fen, setFen, position = "start", onDropOption, options = false, orientation
+   game, fen, setFen, position = "start", onDropOption, options = false, orientation,botmatch=true
 }: ChessBoardProps
     ){
     const { 
@@ -71,7 +72,14 @@ function ChessBoard({
         />
         
     </div>
-    <button id="undo" onClick={undoMove}>↩</button>
+    
+     {
+      botmatch &&
+      <button id="undo" onClick={undoMove}>↩</button>
+    } 
+
+         
+    
    </> 
     )
 }

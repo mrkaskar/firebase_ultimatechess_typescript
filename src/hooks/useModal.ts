@@ -11,14 +11,16 @@ interface ModalContent {
     user: string;
     avatar: string;
     status: string;
+    resign?: string; 
 }
-const useModal = (checkMate:boolean, draw: string, user:User, win:boolean) => {
+const useModal = (checkMate:boolean, draw: string, user:User, win:boolean, gameEnd?:string, resign?:string) => {
     const [showModal, setShowModal] = React.useState<Boolean>(false);
     const [modalContent, setModalContent] = React.useState<ModalContent>({
             title:'',
             user:'',
             avatar:'',
-            status:''
+            status:'',
+            resign:'',
     });
 
     React.useEffect(()=>{
@@ -42,8 +44,20 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean) => {
            }
            setModalContent(status);
        }
+       if(gameEnd){
+           setShowModal(true);
+           const status = {
+               title: "Game finished!",
+               user: user.username,
+               avatar: user.avatar,
+               status: gameEnd,
+               color: user.color,
+               resign,
+           }
+           setModalContent(status);
+       }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[checkMate, draw])
+    },[checkMate, draw,gameEnd])
     
     return {
         showModal,

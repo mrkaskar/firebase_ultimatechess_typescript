@@ -2,8 +2,18 @@ import React from 'react';
 import Hamburger from '../svg/Hamburger';
 import "./NavBar.css";
 import {Link} from 'react-router-dom';
+import { askDraw } from '../lib/db';
 
-const NavBar = () =>{
+interface NavBarProps {
+  title?: string;
+  setOfferDraw?: React.Dispatch<React.SetStateAction<"" | "w" | "b" | "d">>,
+  color?: string;
+  gid?:string;
+  gameEnd?:string;
+  setResignClicked?: React.Dispatch<React.SetStateAction<boolean>> 
+  
+}
+const NavBar = ({title="Bot Match", setOfferDraw,color,gid,gameEnd, setResignClicked}:NavBarProps) =>{
 const [spread, setSpread] = React.useState(false);
 React.useEffect(()=>{
  function closeSubNav() {
@@ -22,13 +32,36 @@ React.useEffect(()=>{
               e.stopPropagation()
               setSpread(!spread)}}/>
         </div>
-            <h3 id="title">Bot Match</h3>
+            <h3 id="title">{title}</h3>
       </div>
   </div>
   <div id="subnav" className={spread ? "spread": ""} onClick={(e)=>e.stopPropagation()}>
-  <Link to="/"><div className="menu-item">HOME</div></Link>
-  <div className="menu-item">RESIGN</div>
-  <div className="menu-item">ASK DRAW</div>
+  {
+    (title === "Bot Match") &&
+  <Link to="/">
+    <div className="menu-item">HOME</div></Link>
+  } 
+  {
+    gameEnd && 
+  <Link to="/">
+    <div className="menu-item"
+    
+    >Back to Home</div></Link>
+  }
+  {
+    !gameEnd &&
+    <>
+    <div className="menu-item"
+    //@ts-ignore
+    onClick={()=>setResignClicked(true)}
+    >RESIGN</div>
+  <div className="menu-item"
+  onClick={()=> {askDraw(gid, color);
+  setSpread(!spread) 
+  }} 
+  >ASK DRAW</div>
+   </> 
+  }
       </div>
   </>
   )  

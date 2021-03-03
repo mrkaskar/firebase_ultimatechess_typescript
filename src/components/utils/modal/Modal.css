@@ -26,29 +26,28 @@
     font-size: 1.3rem;
 }
     
-img{
+#modalimg{
     width: 100px;
+    border-radius: 50%;
 }
 .show{
     display: flex !important;
 }
 @keyframes modal {
     0% {
-        width: 0px;
-        height: 0px;
+        transform: scale(0);
     }
 
     100% {
-        width: 400px;
-        height: 400px;
+        transform: scale(1);
     }
 }
 .draw{
     color: yellow;
 }
-.success{
+.Win{
     color: greenyellow;
 }
-.fail{
+.Lose{
     color: red;
 }

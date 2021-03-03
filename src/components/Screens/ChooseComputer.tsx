@@ -57,6 +57,10 @@ const ChooseComputer =() => {
         <Homenav/>
         <br/>
         <h4>Choose a player to play with</h4>
+        <br/>
+        <span>Or</span><br/>
+        <br/>
+        <span onClick={()=>history.push('/')}>Back</span>
         <div id="bots">
             {
                computers.map((e,i)=>(

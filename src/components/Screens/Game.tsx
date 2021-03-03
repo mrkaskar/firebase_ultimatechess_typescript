@@ -1,11 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import BotChessBoard from '../components/features/boards/BotChessBoard';
-import StockfishBoard from '../components/features/boards/StockfishBoard';
-import NavBar from './NavBar';
+import useAuth from '../../hooks/useAuth';
+import BotChessBoard from '../features/boards/BotChessBoard';
+import StockfishBoard from '../features/boards/StockfishBoard';
+import NavBar from '../NavBar';
 
 const Game = () => {
    const history = useHistory();
+   const auth = useAuth();
    function getGame(){
        let engine: string = "";
        let level: number = 0;
@@ -31,7 +33,7 @@ const Game = () => {
        return {
            engine,
            orentationBoard: parsedGame.user,
-           user:{username: "Guest", avatar: "icon-72x72.png"},
+           user:{username: auth?.user ? auth?.user.nname : "Guest", avatar: auth?.user ? auth?.user.photo : "icon-72x72.png"},
            bot: {name: parsedGame.botname, botlevel: level}
        }
    }

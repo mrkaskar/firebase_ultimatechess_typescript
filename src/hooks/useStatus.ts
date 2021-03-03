@@ -5,6 +5,7 @@ const useStatus = (game: ChessInstance, fen: string) => {
     const [check, setCheck] = React.useState<boolean>(false);  
     const [checkMate, setCheckMate] = React.useState<boolean>(false);  
     const [draw, setDraw] = React.useState<string>("");  
+    
 
     React.useEffect(()=>{
         if(game.in_check() && !check && !game.in_checkmate()){
