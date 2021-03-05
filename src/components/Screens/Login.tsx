@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUser, siginwithGoogle, signinWithEmail } from '../../lib/firebaseAuthService';
+import { signinWithEmail } from '../../lib/firebaseAuthService';
 import HomeNav from './Homenav';
 import Loading from './Loading';
 import './Form.css';

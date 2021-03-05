@@ -10,13 +10,14 @@ interface ChessBoardProps {
     setFen:React.Dispatch<React.SetStateAction<string>>,
     position: string , 
     onDropOption: ({ sourceSquare, targetSquare }: { sourceSquare: Square; targetSquare: Square; }) => void, 
+    onClickOption?: (square: Square) => void,
     options:Boolean ,
     orientation: "white" | "black",
     botmatch?: boolean,
 }
 
 function ChessBoard({
-   game, fen, setFen, position = "start", onDropOption, options = false, orientation,botmatch=true
+   game, fen, setFen, position = "start", onDropOption, onClickOption, options = false, orientation,botmatch=true
 }: ChessBoardProps
     ){
     const { 
@@ -62,7 +63,7 @@ function ChessBoard({
         onMouseOverSquare={onMouseOverSquare}
         onMouseOutSquare={onMouseOutSquare} 
         onDragOverSquare={onDragOverSquare}
-        onSquareClick={onSquareClick}
+        onSquareClick={onClickOption ? onClickOption : onSquareClick}
         squareStyles={squareStyles}
         dropSquareStyle={dropStyle}
         transitionDuration={200}

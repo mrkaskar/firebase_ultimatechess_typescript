@@ -24,6 +24,20 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean, gameE
     });
 
     React.useEffect(()=>{
+        if(gameEnd){
+            setShowModal(true);
+            const status = {
+                title: "Game finished!",
+                user: user.username,
+                avatar: user.avatar,
+                status: gameEnd,
+                color: user.color,
+                resign,
+            }
+            setModalContent(status);
+            return;
+        }
+        
        if(checkMate) {
            setShowModal(true);
            const status = {
@@ -33,6 +47,7 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean, gameE
                status: win ? 'Win' : 'Lose'
            }
            setModalContent(status);
+           return;
        }
        if(draw){
            setShowModal(true);
@@ -43,19 +58,9 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean, gameE
                status: draw
            }
            setModalContent(status);
+           return;
        }
-       if(gameEnd){
-           setShowModal(true);
-           const status = {
-               title: "Game finished!",
-               user: user.username,
-               avatar: user.avatar,
-               status: gameEnd,
-               color: user.color,
-               resign,
-           }
-           setModalContent(status);
-       }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[checkMate, draw,gameEnd])
     

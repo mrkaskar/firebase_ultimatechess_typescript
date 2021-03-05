@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import useBot from "../../../hooks/useBot";
+import React from "react";
 import Chess, { ChessInstance } from "chess.js";
 import ChessBoard from "../../chessboard/ChessBoard";
 import UserArea from "../users/UserArea";
-import useCaptured from "../../../hooks/useCaptured";
 import useStatus from "../../../hooks/useStatus";
 import Modal from "../../utils/modal/Modal";
 import useModal from "../../../hooks/useModal";
 import useHuman from "../../../hooks/useHuman";
-import { deleteGame, denyDraw, endGame, listenAmove, moveObserver, resign } from "../../../lib/db";
+import { denyDraw, endGame, listenAmove, resign, updateU1Time, updateU2Time } from "../../../lib/db";
 import Loading from "../../Screens/Loading";
 import "./humanchess.css";
 import NavBar from "../../NavBar";
+import firebase from '../../../lib/firebase';
 //@ts-ignore
 const game: ChessInstance = new Chess();
 interface User {
@@ -25,12 +24,16 @@ interface HumanChessBoardProps {
   u1: User;
   u2: User;
   gid: string;
+  dbu1:string;
 }
 const HumanChessBoard = ({
+
   orentationBoard,
   u1,
   u2,
   gid,
+  dbu1,
+
 }: HumanChessBoardProps) => {
   const [fen, setFen] = React.useState<string>(
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
@@ -38,21 +41,71 @@ const HumanChessBoard = ({
   const [whiteCaptured, setWhiteCaptured] = React.useState<string[]>([]);
   const [blackCaptured, setBlackCaptured] = React.useState<string[]>([]);
 
+  const [currentu2Time, setCurrentu2Time] = React.useState(u2.time * 60 * 1000);
+  const [currentu1Time, setCurrentu1Time] = React.useState(u1.time * 60 * 1000);
+  
+  const u1tloaded =React.useRef(false);
+  const u2tloaded =React.useRef(false);
+
+  const gameStart = React.useRef(false);
+
   let user1 = {
     ...u1,
     computer: false,
     capturedPieces: u1.color === "w" ? blackCaptured : whiteCaptured,
+    currentu1Time,  
+    setCurrentu1Time,
+    currentu2Time,  
+    setCurrentu2Time,
+    type: "u1",
+    gameStart: gameStart.current,
+    dbu1,
   };
   let user2 = {
     ...u2,
     computer: false,
     capturedPieces: u2.color === "w" ? blackCaptured : whiteCaptured,
+    currentu1Time,  
+    setCurrentu1Time,
+    currentu2Time,  
+    setCurrentu2Time,
+    type: "u2" ,
+    gameStart: gameStart.current,
+    dbu1,
   };
 
   const { checkMate, draw } = useStatus(game, fen);
   const [lastPlayer, setLastPlayer] = React.useState("b");
+  
+  const [drawOffer, setDrawOffer] = React.useState<"w" | "b" | "" | "d">("");
+  const [resignConfirm, setResignConfirm] = React.useState<"w" | "b" | "">("");
+  const [resignClicked, setResignClicked] = React.useState(false);
 
-  let { onDrop } = useHuman(
+  const [gameEnd, setgameEnd] = React.useState("");
+  
+  React.useEffect(()=>{
+    console.log(gameEnd);
+    if(gameEnd){
+      setgameEnd("");
+    } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  React.useEffect(()=>{
+    if(checkMate){
+      endGame(gid, lastPlayer === "b" ? "Black is in Checkmate!" : "White is in Checkmate!");
+      game.reset();
+    }
+    else if(draw){
+      endGame(gid, draw);
+      game.reset();
+    }
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[checkMate, draw])
+
+
+  let { onDrop, onSquareClick } = useHuman(
     fen,
     setFen,
     game,
@@ -60,19 +113,20 @@ const HumanChessBoard = ({
     gid,
     blackCaptured,
     whiteCaptured,
+    currentu1Time,
+    setCurrentu1Time,
+    currentu2Time,
+    setCurrentu2Time,
+    u1.time,
+    u2.time,
+    dbu1,
   );
   const [loading, setLoading] = React.useState(true);
-
-  const [drawOffer, setDrawOffer] = React.useState<"w" | "b" | "" | "d">("");
-  const [resignConfirm, setResignConfirm] = React.useState<"w" | "b" | "">("");
-  const [resignClicked, setResignClicked] = React.useState(false);
-
-  const [gameEnd, setgameEnd] = React.useState("");
-
    React.useEffect(()=>{
      if(resignConfirm){
         endGame(gid, `${resignConfirm === "w" ? "White" : "Black"} Resigned!`)
      }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    },[resignConfirm])
   React.useEffect(()=>{
       if(drawOffer === "d") {
@@ -85,7 +139,9 @@ const HumanChessBoard = ({
   
   React.useEffect(()=>{
       if(gameEnd) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         onDrop=()=>{};
+        game.reset();
       }
   },[gameEnd])
 
@@ -98,25 +154,40 @@ const HumanChessBoard = ({
     ) {
       game.load(fen);
       firstLoad.current = true;
+      gameStart.current = true;
     }
+
   }, [fen]);
 
+  const gameRefresh = React.useRef(false);
   React.useEffect(() => {
     listenAmove(gid).on("value", (snap) => {
       const data = snap.val();
       if (data) {
         if(data.fen){
+          if(!gameStart.current){
+            gameStart.current = true;
+          }
+        }
+        if(data.fen && !gameRefresh.current){
+          setFen(data.fen);
+          gameRefresh.current = true;
+        }
+        if(data.fen && data.player === (orentationBoard === "white" ? "b" :"w")){
         setTimeout(() => {
           setFen(data.fen);
-        }, 200);
+        }, 100);
         }
         if (data.whiteCap) {
+          if(JSON.stringify(data.whiteCap) !== JSON.stringify(whiteCaptured))
           setWhiteCaptured(data.whiteCap);
         }
         if (data.blackCap) {
+          if(JSON.stringify(data.blackCap) !== JSON.stringify(blackCaptured))
           setBlackCaptured(data.blackCap);
         }
         if(data.drawOffer){
+          // if(data.drawOffer !== drawOffer)
            setDrawOffer(data.drawOffer)
         }
         if(data.gameEnd){
@@ -130,6 +201,30 @@ const HumanChessBoard = ({
             setResignConfirm(data.resignConfirm);
             setgameEnd(data.gameEnd);
         }
+        if(data.u1time){
+          // if(data.u1time !== currentu1Time)
+          setCurrentu1Time(data.u1time);
+        }
+        if(data.u2time){
+          // if(data.u2time !== currentu2Time)
+          setCurrentu2Time(data.u2time);
+        }
+        if(data.u2time && !u2tloaded.current && data.u2stoptime){
+          if(data.u2StartTime && dbu1 !== orentationBoard){
+            let preciseTime = (data.u2stoptime - (firebase.firestore.Timestamp.now().seconds * 1000 - data.u2StartTime));
+            setCurrentu2Time(preciseTime);
+            updateU2Time(gid,preciseTime);
+            u2tloaded.current = true;
+          }
+        }
+        if(data.u1time && !u1tloaded.current &&data.u1stoptime){
+          if(data.u1StartTime && dbu1 === orentationBoard){
+            let preciseTime = (data.u1stoptime - (firebase.firestore.Timestamp.now().seconds * 1000 - data.u1StartTime));
+            setCurrentu1Time(preciseTime);
+            updateU1Time(gid,preciseTime);
+            u1tloaded.current = true;
+          }
+        }
       }
       if (loading) {
         setLoading(false);
@@ -141,8 +236,10 @@ const HumanChessBoard = ({
   React.useEffect(() => {
     if (
       fen &&
-      fen !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" &&
-      lastPlayer !== u1.color
+      fen !== "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" 
+      &&
+      lastPlayer === (orentationBoard === "white" ? "b" :"w")
+      
     ) {
       game.load(fen);
     }
@@ -233,10 +330,13 @@ const HumanChessBoard = ({
       gid={gid}
       gameEnd={gameEnd}
       setResignClicked={setResignClicked}
+      fen={fen}
     />
       <UserArea
         turn={lastPlayer === "b" ? "w" : "b"}
         finish={game.game_over() || !!gameEnd}
+        gid={gid}
+        oren={orentationBoard}
         {...user2}
       />
       <ChessBoard
@@ -245,6 +345,7 @@ const HumanChessBoard = ({
         position={fen}
         setFen={setFen}
         onDropOption={onDrop}
+        onClickOption={onSquareClick}
         options={true}
         orientation={orentationBoard}
         botmatch={false}
@@ -252,6 +353,8 @@ const HumanChessBoard = ({
       <UserArea
         turn={lastPlayer === "b" ? "w" : "b"}
         finish={game.game_over() || !!gameEnd}
+        gid={gid}
+        oren={orentationBoard}
         {...user1}
       />
     </>

@@ -101,7 +101,7 @@ import { ChessInstance, Square} from "chess.js";
 
     const onSquareClick = (square: Square) => {
         setPieceSquare(square);
-        
+
         let move = game.move({
             from: pieceSquare,
             to: square,
@@ -109,6 +109,7 @@ import { ChessInstance, Square} from "chess.js";
         });
         if(move === null) return;
         setFen(game.fen());
+        console.log("click move!")
         setHistory(game.history({verbose: true})) 
         //@ts-ignore
         setPieceSquare('');

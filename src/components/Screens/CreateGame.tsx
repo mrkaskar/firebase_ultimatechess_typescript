@@ -88,9 +88,9 @@ const CreateGame = () => {
 
                  <div id="timeselect">
                   <h3 onClick={()=>setTime(0)} className={time===0 ? "active" : ""}>Unlimited</h3>
-                  <h3 onClick={()=>setTime(0)} className={time===5 ? "active" : ""}>5 mins</h3>
-                  <h3 onClick={()=>setTime(0)} className={time===15 ? "active" : ""}>15 mins</h3>
-                  <h3 onClick={()=>setTime(0)} className={time===30 ? "active" : ""}>30 mins</h3>
+                  <h3 onClick={()=>setTime(5)} className={time===5 ? "active" : ""}>5 mins</h3>
+                  <h3 onClick={()=>setTime(15)} className={time===15 ? "active" : ""}>15 mins</h3>
+                  <h3 onClick={()=>setTime(30)} className={time===30 ? "active" : ""}>30 mins</h3>
                 </div>
                   <button onClick={createGame} className="cbtn">Create</button><span>&nbsp;</span><span>&nbsp;</span>
                   <button onClick={()=> history.push('/')} className="cbtn cancel">Cancel</button> 

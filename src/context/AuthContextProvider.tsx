@@ -48,6 +48,7 @@ export const AuthContextProvider = ({children}:{children:React.ReactNode}) => {
               setLoading(false);
               setUser(user);
       },(error) => console.log(error))  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     if(loading) return <Loading/>

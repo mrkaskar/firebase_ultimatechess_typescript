@@ -28,7 +28,7 @@ export const getPlayGame = async (uid: string) => {
     id = res.docs[0].id
     return id;
 }
-export const acceptGame = async(uid: string, uname: string, photo:string, color: string, gid: string) => {
+export const acceptGame = async(uid: string, uname: string, photo:string, color: string, gid: string, time:number) => {
    let acceptColor;
    let u1color = color;
    if(color === "random"){
@@ -46,11 +46,21 @@ export const acceptGame = async(uid: string, uname: string, photo:string, color:
     },{
         merge: true
     })
-    
-    await createAgame(gid);
+    let milliTime = time * 60 * 1000; 
+    await createAgame(gid, milliTime, milliTime);
     
     return res;
 }
+
+
+export const gameStartTime = async (gid: string, time: number, now: number) => {
+     await rdb.ref('/games/'+gid).update({
+        gameStart: now,
+        u1time: time * 60 * 1000,
+        u2time: time * 60 * 1000,
+    })
+}
+
 
 export const makeGame = async (uid: string,uname: string,photo:string,time:number, color:string) => {
     const res = await db.collection('games').add({
@@ -103,16 +113,44 @@ export const createAgame = async (gid: string, u1time:number=0, u2time:number=0)
         drawOffer:'',
         resignConfirm:'', 
         gameEnd:'',
+        blackFirst:false,
     })
 }
 
-export const makeAmove = async (gid: string, fen: string, blackCap: string[], whiteCap: string[], u1time: number, u2time:number, player:string) => {
-    await rdb.ref('/games/'+gid).set({
+
+export const makeu1move = async (gid: string, fen: string, blackCap: string[], whiteCap: string[], u1time: number, player:string) => {
+    await rdb.ref('/games/'+gid).update({
         fen,
         whiteCap,
         blackCap,
         u1time,
+        player,
+        drawOffer:'',
+        resignConfirm:'', 
+        gameEnd:'',
+        u2StartTime: firebase.firestore.Timestamp.now().seconds * 1000,
+        u1stoptime: u1time,
+    })   
+}
+export const makeu2move = async (gid: string, fen: string, blackCap: string[], whiteCap: string[], u2time:number, player:string) => {
+    await rdb.ref('/games/'+gid).update({
+        fen,
+        whiteCap,
+        blackCap,
         u2time,
+        player,
+        drawOffer:'',
+        resignConfirm:'', 
+        gameEnd:'',
+        u1StartTime: firebase.firestore.Timestamp.now().seconds * 1000,
+        u2stoptime: u2time,
+    })   
+}
+export const makeAmove = async (gid: string, fen: string, blackCap: string[], whiteCap: string[],  player:string) => {
+    await rdb.ref('/games/'+gid).update({
+        fen,
+        whiteCap,
+        blackCap,
         player,
         drawOffer:'',
         resignConfirm:'', 
@@ -148,11 +186,23 @@ export const endGame = async (gid: string, reason: string )=>{
         gameEnd:reason 
     })
     setTimeout(async()=>{
-//   await deleteGame(gid);
+  await deleteGame(gid);
         },1000)
 }
 
 export const listenAmove = (gid: string) => {
     let moveRef = rdb.ref('/games/'+gid);
     return moveRef;
+}
+
+export const updateU1Time = async (gid: string, time: number) => {
+    await rdb.ref('/games/'+gid).update({
+        u1time:time 
+    })
+}
+
+export const updateU2Time = async (gid: string, time: number) => {
+    await rdb.ref('/games/'+gid).update({
+        u2time:time 
+    })
 }

@@ -17,10 +17,11 @@ const Modal = ({show, setShowModal, modalContent}:{show: Boolean, setShowModal:R
     'failbtn' : showStatus === 'Draw by Agreement!' ?
     'draw' : showStatus === 'draw' ? 
     'draw' : showStatus === "You Resigned!" ?
+    "Lose" : showStatus === "You Time Out!" ?
+    "Lose" : showStatus === "Game Aborted!" ?
+    "Lose" : showStatus === "You are in Checkmate!" ?
     "Lose" : "Win"
     }`
-    console.log(`modal user color ${color}`)
-    console.log(`modal status ${status}`)
     React.useEffect(()=>{
         setShowStatus(status);
 
@@ -29,7 +30,18 @@ const Modal = ({show, setShowModal, modalContent}:{show: Boolean, setShowModal:R
                     setShowStatus("You Resigned!");
                 }
             }
+            if(status === "White Time Out!" || status === "Black Time Out!"){
+                if(color === status[0].toLowerCase()){
+                   setShowStatus("You Time Out!");
+                }
+            }
+            if(status === "White is in Checkmate!" || status === "Black is in Checkmate!"){
+                if(color === status[0].toLowerCase()){
+                   setShowStatus("You are in Checkmate!");
+                }
+            }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[status])
    return (
        <div onClick={()=> {setShowModal(false)}} id="backdrop" className={`${show ? 'show': ''}`}>
@@ -44,4 +56,4 @@ const Modal = ({show, setShowModal, modalContent}:{show: Boolean, setShowModal:R
    ) 
 }
 
-export default Modal;
+export default React.memo(Modal);

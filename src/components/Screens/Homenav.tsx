@@ -2,7 +2,6 @@ import useAuth from "../../hooks/useAuth";
 
 const HomeNav = () => {
   const auth = useAuth();
- console.log(auth)
   return (
     <div id="homenav">
       <div style={{ display: "flex", alignItems: "center" }}>

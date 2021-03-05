@@ -2,7 +2,7 @@ import React from 'react';
 import Hamburger from '../svg/Hamburger';
 import "./NavBar.css";
 import {Link} from 'react-router-dom';
-import { askDraw } from '../lib/db';
+import { askDraw, endGame } from '../lib/db';
 
 interface NavBarProps {
   title?: string;
@@ -10,10 +10,11 @@ interface NavBarProps {
   color?: string;
   gid?:string;
   gameEnd?:string;
-  setResignClicked?: React.Dispatch<React.SetStateAction<boolean>> 
+  setResignClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+  fen?: string;
   
 }
-const NavBar = ({title="Bot Match", setOfferDraw,color,gid,gameEnd, setResignClicked}:NavBarProps) =>{
+const NavBar = ({title="Bot Match", setOfferDraw,color,gid,gameEnd, setResignClicked, fen}:NavBarProps) =>{
 const [spread, setSpread] = React.useState(false);
 React.useEffect(()=>{
  function closeSubNav() {
@@ -36,6 +37,13 @@ React.useEffect(()=>{
       </div>
   </div>
   <div id="subnav" className={spread ? "spread": ""} onClick={(e)=>e.stopPropagation()}>
+  {
+    (fen === "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" && !gameEnd)  && 
+    //@ts-ignore
+    <div className="menu-item" onClick={()=>endGame(gid, "Game Aborted!")}>
+      ABORT GAME
+    </div> 
+  }
   {
     (title === "Bot Match") &&
   <Link to="/">

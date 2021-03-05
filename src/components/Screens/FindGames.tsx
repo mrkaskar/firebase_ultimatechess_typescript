@@ -38,12 +38,13 @@ const FindGames = () => {
            setSearch(false);
        } 
     },1000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  const accept = async (color: string, gid: string) =>{
+  const accept = async (color: string, gid: string, time: number) =>{
       setLoading(true);
       //@ts-ignore
-      await acceptGame(auth?.user.uid,auth?.user.nname, auth?.user.photo,color,gid);
+      await acceptGame(auth?.user.uid,auth?.user.nname, auth?.user.photo,color,gid, time);
       history.push('/hvhgame'); 
   }
   const gameSearch = () => {
@@ -55,10 +56,10 @@ const FindGames = () => {
          <img className="chosenphoto" src={chosen.photo} alt="user"/>
          <h2>{chosen.uname}</h2>
          <h3>{chosen.color}</h3>
-         <h4>{chosen.time === 0 ? "Unlimited" : chosen.time}</h4>
+         <h4>{chosen.time === 0 ? "Unlimited" : `${chosen.time} mins`}</h4>
          <div>
             <button className="cbtn success"
-            onClick={()=>accept(chosen.color, chosen.gid)} 
+            onClick={()=>accept(chosen.color, chosen.gid, chosen.time)} 
             >Accept</button> 
             <span>&nbsp;</span>
             <span>&nbsp;</span>
@@ -89,7 +90,7 @@ const FindGames = () => {
               </div>
               <div id="gameinfo">
                 <span id="gametime">
-                  <i>Unlimited</i>
+                  <i>{e.time ? `${e.time} mins`:"Unlimited"}</i>
                 </span>
                 <br />
                 <span id="gamecolor">
