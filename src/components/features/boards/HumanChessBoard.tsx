@@ -84,7 +84,6 @@ const HumanChessBoard = ({
   const [gameEnd, setgameEnd] = React.useState("");
   
   React.useEffect(()=>{
-    console.log(gameEnd);
     if(gameEnd){
       setgameEnd("");
     } 
@@ -114,12 +113,9 @@ const HumanChessBoard = ({
     blackCaptured,
     whiteCaptured,
     currentu1Time,
-    setCurrentu1Time,
     currentu2Time,
-    setCurrentu2Time,
-    u1.time,
-    u2.time,
     dbu1,
+    lastPlayer === "w" ? "b" : "w",
   );
   const [loading, setLoading] = React.useState(true);
    React.useEffect(()=>{
@@ -162,29 +158,33 @@ const HumanChessBoard = ({
   const gameRefresh = React.useRef(false);
   React.useEffect(() => {
     listenAmove(gid).on("value", (snap) => {
+      console.log("Trigger!")
       const data = snap.val();
       if (data) {
         if(data.fen){
           if(!gameStart.current){
             gameStart.current = true;
+            console.log("game start current should not work")
           }
         }
         if(data.fen && !gameRefresh.current){
           setFen(data.fen);
           gameRefresh.current = true;
         }
-        if(data.fen && data.player === (orentationBoard === "white" ? "b" :"w")){
+        if(data.fen !== fen){
         setTimeout(() => {
           setFen(data.fen);
         }, 100);
         }
         if (data.whiteCap) {
-          if(JSON.stringify(data.whiteCap) !== JSON.stringify(whiteCaptured))
-          setWhiteCaptured(data.whiteCap);
+          if(JSON.stringify(data.whiteCap) !== JSON.stringify(whiteCaptured)){
+            setWhiteCaptured(data.whiteCap);
+          }
         }
         if (data.blackCap) {
-          if(JSON.stringify(data.blackCap) !== JSON.stringify(blackCaptured))
-          setBlackCaptured(data.blackCap);
+          if(JSON.stringify(data.blackCap) !== JSON.stringify(blackCaptured)){
+            setBlackCaptured(data.blackCap);
+          }
         }
         if(data.drawOffer){
           // if(data.drawOffer !== drawOffer)
@@ -230,8 +230,11 @@ const HumanChessBoard = ({
         setLoading(false);
       }
     });
+    return () => {
+      listenAmove(gid).off("value");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fen]);
 
   React.useEffect(() => {
     if (

@@ -21,12 +21,6 @@ function App() {
         <Route exact path="/" component={Home}>
         </Route>
 
-        <Route exact path="/index.html" component={Home}>
-        </Route>
-
-        <Route exact path="/index" component={Home}>
-        </Route>
-
         <Route exact path="/computer" component={ChooseComputer}>
         </Route>
 

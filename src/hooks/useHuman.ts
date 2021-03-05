@@ -11,21 +11,18 @@ const useHuman = (
     blackCap: string[],
     whiteCap: string[],
     currentu1Time: number,
-    setCurrentu1Time: React.Dispatch<React.SetStateAction<number>>,
     currentu2Time: number,
-    setCurrentu2Time: React.Dispatch<React.SetStateAction<number>>,
-    u1time:number,
-    u2time:number, 
     dbu1: string,
+    turn: string
 ) => {
 
   //@ts-ignore
    const [pieceSquare, setPieceSquare] = React.useState<Square>('');
    
-function dbMove(newFen:string){
+function dbMove(newFen:string, gameHistory:any[]){
         let cblackCap:string[] = [...blackCap];
-        let cwhiteCap:string[] = [...whiteCap];
-        game.history({verbose: true}).forEach(e =>{
+        let cwhiteCap: string[] = [...whiteCap];
+        gameHistory.forEach(e =>{
           if(e.captured){
             if(e.color === "w"){
               cblackCap.push(`b${e.captured}`)
@@ -54,7 +51,7 @@ function dbMove(newFen:string){
         targetSquare: Square;
       }) => {
 
-        if (player !== game.turn()) {
+        if (player !== turn) {
           return;
         }
         const move = game.move({
@@ -66,10 +63,10 @@ function dbMove(newFen:string){
         if (move === null) {
           return;
         };
-
+        let gameHistory = game.history({verbose: true});
         let newFen = game.fen();
         setFen(newFen);
-        dbMove(newFen)
+        dbMove(newFen, gameHistory)
       };
 
     const onSquareClick = (square: Square) => {
@@ -81,11 +78,12 @@ function dbMove(newFen:string){
             promotion: "q"
         });
         if(move === null) return;
+        let gameHistory = game.history({verbose: true});
         let newFen = game.fen();
         setFen(newFen);
         //@ts-ignore
         setPieceSquare('');
-        dbMove(newFen)        
+        dbMove(newFen, gameHistory)        
     }
 
       return { onDrop, onSquareClick };
