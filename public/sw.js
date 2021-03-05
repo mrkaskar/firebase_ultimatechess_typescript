@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals */
-const staticCacheName = "site-static-v5";
+const staticCacheName = "site-static-v6";
 
 const assets = [
   "/",
-  "stockfish.js",
-  "botworker.js",
+  // "stockfish.js",
+  // "botworker.js",
   "/index.html",
   "/img/pieces/bb.png",
   "/img/pieces/bk.png",
@@ -34,7 +34,7 @@ const assets = [
   // "/static/css/main.f7edd3e3.chunk.css",
   // "/static/js/2.716918dd.chunk.js",
   // "/static/js/main.a3bd94e6.chunk.js",
-  "app.js",
+  // "app.js",
 ];
 
 self.addEventListener("install", (evt) => {

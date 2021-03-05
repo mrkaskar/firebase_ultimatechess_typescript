@@ -164,14 +164,13 @@ const HumanChessBoard = ({
         if(data.fen){
           if(!gameStart.current){
             gameStart.current = true;
-            console.log("game start current should not work")
           }
         }
         if(data.fen && !gameRefresh.current){
           setFen(data.fen);
           gameRefresh.current = true;
         }
-        if(data.fen !== fen){
+        if(data.fen !== fen && data.fen){
         setTimeout(() => {
           setFen(data.fen);
         }, 100);
