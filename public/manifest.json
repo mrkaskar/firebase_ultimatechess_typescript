@@ -14,6 +14,7 @@
     "background_color": "#4caf50",
     "theme_color": "#4caf50",
     "orientation": "portrait-primary",
+    "categories": ["game", "chess", "board game", "multiplayer"],
     "icons": [
         {"src":"icon-72x72.png","type":"image/png","sizes":"72x72"},
         {"src":"icon-96x96.png","type":"image/png","sizes":"96x96"},

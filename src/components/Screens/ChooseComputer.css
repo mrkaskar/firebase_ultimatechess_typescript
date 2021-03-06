@@ -4,7 +4,8 @@
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
     max-width: 480px;
-    /* background-color: aqua; */
+    max-height: 500px;
+    overflow-y: auto;
 }
 .botimg{
     width: 50px;

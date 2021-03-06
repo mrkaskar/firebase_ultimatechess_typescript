@@ -6,14 +6,20 @@ import HomeNav from "./Homenav";
 import useAuth from "../../hooks/useAuth";
 import { logOut } from "../../lib/firebaseAuthService";
 import useTheme from "../../hooks/useTheme";
+import { disableBodyScroll } from "body-scroll-lock";
 
 const Home = () => {
   const auth = useAuth();
   const { theme } = useTheme()
+    const targetEle = React.useRef<any>(null);
+    
+    React.useEffect(()=>{
+       disableBodyScroll(targetEle.current);
+    },[]);
    return (
     <>
       <HomeNav />
-      <div id="homegrid">
+      <div id="homegrid" ref={targetEle}>
         <div className="grid">
           <Link style={{color: theme.text}} to="/computer">
             <GameCard img="bishop" show="Computer" />

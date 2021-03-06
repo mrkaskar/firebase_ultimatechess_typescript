@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "./App.css";
 import Home from './components/Screens/Home';
@@ -15,6 +16,7 @@ import About from './components/About';
 
 const AppScaffold = () => {
    const {theme} = useTheme();
+
    return (
     <div className="App" style={{backgroundColor:theme.background, color: theme.text}}>
     <Router>
