@@ -103,7 +103,7 @@ const HumanChessBoard = ({
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[checkMate, draw])
+  },[checkMate, draw, lastPlayer])
 
 
   let { onDrop, onSquareClick } = useHuman(
