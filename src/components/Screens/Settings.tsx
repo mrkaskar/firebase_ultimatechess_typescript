@@ -20,7 +20,7 @@ const Settings = () => {
     const [photoUrl, setPhotoUrl] = React.useState<any>(null);
     const [photoError, setPhotoError] = React.useState("");
 
-    const uploadPhoto = (e:any) => {
+    const uploadPhoto = async (e:any) => {
         setPhotoError("");
         if(e.target.files.length > 0){
             let uploaded = e.target.files[0];
@@ -32,7 +32,8 @@ const Settings = () => {
             setPhotoUrl(blob);
             auth?.setUser({...auth?.user, photo:blob })
             //@ts-ignore
-            changePhoto(auth?.user.uid, uploaded)
+            let url = await changePhoto(auth?.user.uid, uploaded)
+            auth?.setUser({...auth?.user, photo:url })
         }
         e.target.files = null;
     }

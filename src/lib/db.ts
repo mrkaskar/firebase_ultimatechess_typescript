@@ -13,6 +13,7 @@ export const changePhoto = async (uid: string, file:any) => {
    db.collection('users').doc(uid).update({
       photo: url 
    });
+   return url;
 }
 
 export const updateName = async (uid:string, name: string) => {
