@@ -4,7 +4,7 @@ const staticCacheName = "site-static-v12";
 const assets = [
   // "stockfish.js",
   // "botworker.js",
-  "/",
+  // "/",
   "offline.html",
   "/img/pieces/bb.png",
   "/img/pieces/bk.png",
