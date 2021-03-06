@@ -5,7 +5,6 @@ import { acceptGame, gameObserver } from "../../lib/db";
 import useAuth from "../../hooks/useAuth";
 import Loading from "./Loading";
 import { useHistory } from "react-router-dom";
-import { disableBodyScroll } from "body-scroll-lock";
 
 const FindGames = () => {
   const [loading, setLoading] = React.useState(true);
@@ -76,12 +75,6 @@ const FindGames = () => {
         </div> 
      </div> ;
   }
-  const targetEle = React.useRef<any>(null);
-    
-  React.useEffect(()=>{
-     disableBodyScroll(targetEle.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[targetEle.current]);
 
   
   if (loading) return <Loading />;
@@ -90,7 +83,7 @@ const FindGames = () => {
     <>
     {confirm && showConfirm()}
       <HomeNav />
-      <div id="gamelist" ref={targetEle}>
+      <div id="gamelist">
         {games.length > 0 ?
           //@ts-ignore
           games.map((e: any, i:number) => (

@@ -1,4 +1,3 @@
-import { disableBodyScroll } from "body-scroll-lock";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -54,16 +53,10 @@ const Settings = () => {
     //@ts-ignore
     updateTheme(auth?.user.uid, key.toLowerCase());
   };
-  const targetEle = React.useRef<any>(null);
-
-  React.useEffect(() => {
-    disableBodyScroll(targetEle.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [targetEle.current]);
   return (
     <>
       <HomeNav />
-      <div id="setting-panel" ref={targetEle}>
+      <div id="setting-panel">
         <div id="avatar-setting">
           <div>
             <img

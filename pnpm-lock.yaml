@@ -6,7 +6,6 @@ dependencies:
   '@types/node': 12.20.4
   '@types/react': 17.0.2
   '@types/react-dom': 17.0.1
-  body-scroll-lock: 3.1.5
   chess.js: 0.10.2
   chessboardjsx: 2.4.2_react-dom@17.0.1+react@17.0.1
   firebase: 8.2.9
@@ -17,7 +16,6 @@ dependencies:
   typescript: 4.1.5
   web-vitals: 1.1.0
 devDependencies:
-  '@types/body-scroll-lock': 2.6.1
   '@types/chess.js': 0.10.1
   '@types/react-router-dom': 5.1.7
 lockfileVersion: 5.2
@@ -2253,10 +2251,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
-  /@types/body-scroll-lock/2.6.1:
-    dev: true
-    resolution:
-      integrity: sha512-PPFm/2A6LfKmSpvMg58gHtSqwwMChbcKKGhSCRIhY4MyFzhY8moAN6HrTCpOeZQUqkFdTFfMqr7njeqGLKt72Q==
   /@types/chess.js/0.10.1:
     dev: true
     resolution:
@@ -3488,10 +3482,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
-  /body-scroll-lock/3.1.5:
-    dev: false
-    resolution:
-      integrity: sha512-Yi1Xaml0EvNA0OYWxXiYNqY24AfWkbA6w5vxE7GWxtKfzIbZM+Qw+aSmkgsbWzbHiy/RCSkUZBplVxTA+E4jJg==
   /bonjour/3.5.0:
     dependencies:
       array-flatten: 2.1.2
@@ -13096,14 +13086,12 @@ specifiers:
   '@testing-library/jest-dom': ^5.11.4
   '@testing-library/react': ^11.1.0
   '@testing-library/user-event': ^12.1.10
-  '@types/body-scroll-lock': ^2.6.1
   '@types/chess.js': ^0.10.1
   '@types/jest': ^26.0.15
   '@types/node': ^12.0.0
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
   '@types/react-router-dom': ^5.1.7
-  body-scroll-lock: ^3.1.5
   chess.js: 0.10.2
   chessboardjsx: ^2.4.2
   firebase: ^8.2.9

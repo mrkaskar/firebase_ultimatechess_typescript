@@ -2,7 +2,6 @@ import React from 'react';
 import Homenav from './Homenav';
 import "./ChooseComputer.css"
 import { useHistory } from 'react-router-dom';
-import { disableBodyScroll } from 'body-scroll-lock';
 
 const ChooseComputer =() => {
     const computers = [{
@@ -40,11 +39,6 @@ const ChooseComputer =() => {
     const [choose, setChoose] = React.useState("");
     const [color, setColor] = React.useState<Color>("random");
     const history = useHistory();
-    const targetEle = React.useRef<any>(null);
-    
-    React.useEffect(()=>{
-       disableBodyScroll(targetEle.current);
-    },[]);
 
     const gameAccept = () =>{
        let gameid = Math.floor(Math.random()*1000) + Date.now();
@@ -66,7 +60,7 @@ const ChooseComputer =() => {
         <h4>Choose a player to play with</h4>
         <br/>
         <span onClick={()=>history.push('/')}>Back</span>
-        <div id="bots" ref={targetEle}>
+        <div id="bots">
             {
                computers.map((e,i)=>(
                    <div key={i} className="bot" onClick={()=>setChoose(e.name)}>

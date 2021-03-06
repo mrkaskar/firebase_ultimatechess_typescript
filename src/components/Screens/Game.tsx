@@ -40,7 +40,7 @@ const Game = () => {
    const [game] = React.useState(getGame());
    
    return (
-        <>
+   <>
             <NavBar/>
             {game.engine === 'bot' ? <BotChessBoard
             //@ts-ignore
@@ -53,7 +53,7 @@ const Game = () => {
             user={game.user}
             bot={game.bot}
             />}
-        </>
+    </>
    )
 }
 
