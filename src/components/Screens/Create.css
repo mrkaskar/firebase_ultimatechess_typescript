@@ -1,6 +1,7 @@
 #creategame-panel{
     width: 100%;
     margin: 0 auto;
+    margin-top: 20px;
     max-width: 500px;
     height: 500px;
     background-color: rgba(255, 255, 255, 0.151);

@@ -4,14 +4,12 @@
     width: 100%;
     max-width: 500px;
     grid-template-columns: 50% 50%;
-    color: rgb(250, 255, 254)
 }
 
 #homenav{
     width: 100%;
     max-width: 400px;
     height: 70px;
-    background-color: rgba(7, 103, 167, 0.87);
     margin: 0 auto;
     border-radius: 8px;
     margin-bottom: 8px;
@@ -73,6 +71,5 @@
 }
 
 a{
-    color: white;
     text-decoration: none;
 }

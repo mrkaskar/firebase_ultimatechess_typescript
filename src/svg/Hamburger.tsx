@@ -1,6 +1,8 @@
 import React from "react";
+import useTheme from "../hooks/useTheme";
 
 function Hamburger(props: React.SVGProps<SVGSVGElement>) {
+  const { theme } = useTheme();
   return (
     <svg
       width={30}
@@ -14,7 +16,7 @@ function Hamburger(props: React.SVGProps<SVGSVGElement>) {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-        fill="#ffffff"
+        fill={theme.text}
       />
     </svg>
   );

@@ -1,0 +1,15 @@
+#about-panel{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 480px;
+    background-color: rgba(255, 255, 255, 0.048);
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
+    margin-top: 20px;
+}
+
+#message{
+    line-height: 60px;
+    font-size: 1.1rem;
+}

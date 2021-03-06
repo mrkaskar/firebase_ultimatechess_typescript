@@ -3,6 +3,7 @@ import Chessboard from 'chessboardjsx';
 import "./ChessBoard.css";
 import useValidator from '../../hooks/useValidator';
 import {ChessInstance, Square} from 'chess.js';
+import useTheme from '../../hooks/useTheme';
 
 interface ChessBoardProps {
     game: ChessInstance, 
@@ -31,7 +32,7 @@ function ChessBoard({
         } = useValidator(game, fen, setFen); 
 
     const [width, setWidth] = React.useState<number>(window.innerWidth);
-
+    const {theme} = useTheme();
     React.useEffect(()=>{
        window.onresize = () => {
             setWidth(window.innerWidth);
@@ -67,8 +68,8 @@ function ChessBoard({
         squareStyles={squareStyles}
         dropSquareStyle={dropStyle}
         transitionDuration={200}
-        darkSquareStyle={{backgroundColor:'#018a6c'}}
-        lightSquareStyle={{backgroundColor:'#bdeaf5'}}
+        darkSquareStyle={{backgroundColor:theme.darkSquare}}
+        lightSquareStyle={{backgroundColor:theme.lightSquare}}
         orientation={orientation}
         />
         

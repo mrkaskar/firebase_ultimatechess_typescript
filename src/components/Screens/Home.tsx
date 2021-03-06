@@ -5,32 +5,34 @@ import { Link } from "react-router-dom";
 import HomeNav from "./Homenav";
 import useAuth from "../../hooks/useAuth";
 import { logOut } from "../../lib/firebaseAuthService";
+import useTheme from "../../hooks/useTheme";
 
 const Home = () => {
   const auth = useAuth();
-  return (
+  const { theme } = useTheme()
+   return (
     <>
       <HomeNav />
       <div id="homegrid">
         <div className="grid">
-          <Link to="/computer">
+          <Link style={{color: theme.text}} to="/computer">
             <GameCard img="bishop" show="Computer" />
           </Link>
         </div>
         {auth?.user && (
           <>
             <div className="grid">
-            <Link to="/create">
+            <Link style={{color: theme.text}} to="/create">
               <GameCard img="blackqueen" show="Create Game" />
             </Link>
             </div>
             <div className="grid">
-            <Link to="/find">
+            <Link style={{color: theme.text}} to="/find">
               <GameCard img="blackknight" show="Find Games" />
             </Link>
             </div>
             <div className="grid">
-            <Link to="/settings">
+            <Link style={{color: theme.text}} to="/settings">
               <GameCard img="king" show="Settings" />
             </Link>
             </div>
@@ -42,18 +44,25 @@ const Home = () => {
         {!auth?.user && (
           <>
             <div className="grid">
-            <Link to="/register">
+            <Link style={{color: theme.text}} to="/register">
               <GameCard img="rook" show="Register for Online" />
             </Link>
             </div>
             <div className="grid">
-            <Link to="/login">
+            <Link style={{color: theme.text}} to="/login">
               <GameCard img="blackpawn" show="Login" />
             </Link>
             </div>
           </>
         )}
+
+        <div className="grid">
+          <Link style={{color: theme.text}} to="/about">
+            <GameCard img="about" show="About" />
+          </Link>
+        </div>
       </div>
+
     </>
   );
 };

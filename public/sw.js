@@ -59,15 +59,13 @@ self.addEventListener("activate", (evt) => {
 
 self.addEventListener("fetch", (evt) => {
   evt.respondWith(
-    caches
-      .match(evt.request)
-      .then((cacheRes) => {
-        return cacheRes || fetch(evt.request);
-      })
-      .catch(() => {
-        if (evt.request.url.indexOf(".html") > -1) {
-          return caches.match("/pages/fallback.html");
-        }
-      })
+    caches.match(evt.request).then((cacheRes) => {
+      return cacheRes || fetch(evt.request);
+    })
+    // .catch(() => {
+    //   if (evt.request.url.indexOf(".html") > -1) {
+    //     return caches.match("/pages/fallback.html");
+    //   }
+    // })
   );
 });

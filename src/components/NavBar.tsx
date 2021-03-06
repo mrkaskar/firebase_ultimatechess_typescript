@@ -3,6 +3,7 @@ import Hamburger from '../svg/Hamburger';
 import "./NavBar.css";
 import {Link} from 'react-router-dom';
 import { askDraw, endGame } from '../lib/db';
+import useTheme from '../hooks/useTheme';
 
 interface NavBarProps {
   title?: string;
@@ -24,19 +25,21 @@ React.useEffect(()=>{
  return () => window.removeEventListener('click', closeSubNav);
   
 },[])
+
+  const {theme} = useTheme();
   return (
     <>
   <div id="nav-wrapper">
-      <div id="navbar">
+      <div id="navbar" style={{backgroundColor:theme.navColor}}>
         <div id="view">
-            <Hamburger  onClick={(e)=>{
+            <Hamburger onClick={(e)=>{
               e.stopPropagation()
               setSpread(!spread)}}/>
         </div>
             <h3 id="title">{title}</h3>
       </div>
   </div>
-  <div id="subnav" className={spread ? "spread": ""} onClick={(e)=>e.stopPropagation()}>
+  <div style={{backgroundColor:theme.subNavColor}} id="subnav" className={spread ? "spread": ""} onClick={(e)=>e.stopPropagation()}>
   {
     (fen === "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" && !gameEnd)  && 
     //@ts-ignore
@@ -57,7 +60,7 @@ React.useEffect(()=>{
     >Back to Home</div></Link>
   }
   {
-    !gameEnd &&
+    ((!gameEnd) && (title !== "Bot Match")) &&
     <>
     <div className="menu-item"
     //@ts-ignore

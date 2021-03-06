@@ -28,8 +28,11 @@ export const siginwithGoogle = async () => {
   let response = await auth
     .signInWithPopup(new firebase.auth.GoogleAuthProvider());
   let user = format(response.user);
-  //@ts-ignore
-  await saveUser(user.uid, user.nname, user.email, user.photo);
+  let res = await db.collection('users').where("email", "==", user.email).get();
+  if(res.docs.length === 0){
+    //@ts-ignore
+    await saveUser(user.uid, user.nname, user.email, user.photo);
+  }
   return user;
 };
 
@@ -45,12 +48,14 @@ export const signinWithEmail = async (email:string, password:string) => {
 }
 
 export const saveUser = async (uid: string, nname: string, email:string, photo: string) => {
+
     try{
         await db.collection('users').doc(uid).set({
            uid,
            nname,
            email,
-           photo
+           photo,
+           theme: 'natural'
        });
        return "saved";
     }

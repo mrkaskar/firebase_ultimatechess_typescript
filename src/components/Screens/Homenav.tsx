@@ -1,9 +1,12 @@
 import useAuth from "../../hooks/useAuth";
+import useTheme from "../../hooks/useTheme";
 
 const HomeNav = () => {
   const auth = useAuth();
+  const { theme } = useTheme();
   return (
-    <div id="homenav">
+    <div id="homenav" style={{backgroundColor:theme.homenav}}>
+
       <div style={{ display: "flex", alignItems: "center" }}>
         {auth?.user ? (
           <>

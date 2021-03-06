@@ -4,11 +4,13 @@ import HomeNav from './Homenav';
 import Loading from './Loading';
 import './Form.css';
 import { useHistory } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Register =  () => {
     const [error, setError] = React.useState<string|null>(null);
     const [loading, setLoading] = React.useState(false);
     const history = useHistory();
+    const auth = useAuth();
 
     const Submit = async (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -22,7 +24,9 @@ const Register =  () => {
       try{
         setLoading(true);
         await createUser(username,email,password); 
-        history.push('/');
+        if(auth?.user){
+          history.push('/');
+        }
       }
       catch(e){
         setLoading(false);
@@ -33,7 +37,9 @@ const Register =  () => {
       try{
         setLoading(true);
         await siginwithGoogle();
+        if(auth?.user){
         history.push('/');
+        }
       }
       catch(e){
         setLoading(false);
@@ -73,8 +79,8 @@ const Register =  () => {
                 <button className="fbtn">Register</button>
                 </form>
                </div>
-
             </div>
+                <button onClick={()=>history.push('/')} className="cbtn cancel">Back</button>
         </>
     )
 }

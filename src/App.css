@@ -1,4 +1,7 @@
 .App {
   text-align: center;
-  color: white;
+  min-height: 100vh;
+  max-height: 1000px;
+  overflow: auto;
+  padding-top: 3px;
 }

@@ -2,6 +2,29 @@ import firebase from "./firebase";
 
 const db = firebase.firestore();
 const rdb = firebase.database();
+const storage = firebase.storage();
+
+
+export const changePhoto = async (uid: string, file:any) => {
+   let userRef = storage.ref().child(`${uid}.jpg`);
+   let snap = await userRef.put(file, { contentType: 'image/jpeg'}); 
+   let url = await snap.ref.getDownloadURL();
+   
+   db.collection('users').doc(uid).update({
+      photo: url 
+   });
+}
+
+export const updateName = async (uid:string, name: string) => {
+   db.collection('users').doc(uid).update({
+      nname: name 
+   });
+}
+export const updateTheme = async (uid:string, theme: string) => {
+   db.collection('users').doc(uid).update({
+      theme, 
+   });
+}
 
 export const getUser = async (uid: string) => {
     const userRef =  db.collection('users').doc(uid);

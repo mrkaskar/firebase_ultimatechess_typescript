@@ -33,11 +33,13 @@ const FindGames = () => {
   }, [auth?.user]);
 
   React.useEffect(()=>{
-     setTimeout(() => {
+    let timeout: NodeJS.Timeout;
+     timeout = setTimeout(() => {
        if(games.length === 0){
            setSearch(false);
        } 
     },1000);
+     return () => clearTimeout(timeout);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
