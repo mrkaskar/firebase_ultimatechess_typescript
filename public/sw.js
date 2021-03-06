@@ -1,11 +1,12 @@
 /* eslint-disable no-restricted-globals */
-const staticCacheName = "site-static-v10";
+const staticCacheName = "site-static-v11";
 
 const assets = [
   // "stockfish.js",
   // "botworker.js",
   "/",
   "/index.html",
+  "offline.html",
   "/img/pieces/bb.png",
   "/img/pieces/bk.png",
   "/img/pieces/bn.png",
@@ -58,14 +59,16 @@ self.addEventListener("activate", (evt) => {
 });
 
 self.addEventListener("fetch", (evt) => {
-  evt.respondWith(
-    caches.match(evt.request).then((cacheRes) => {
-      return cacheRes || fetch(evt.request);
-    })
-    // .catch(() => {
-    //   if (evt.request.url.indexOf(".html") > -1) {
-    //     return caches.match("/pages/fallback.html");
-    //   }
-    // })
-  );
+  if (evt.request.url.indexOf("firestore.googleapis.com") === -1) {
+    evt.respondWith(
+      caches
+        .match(evt.request)
+        .then((cacheRes) => {
+          return cacheRes || fetch(evt.request);
+        })
+        .catch(() => {
+          return caches.match("/pages/fallback.html");
+        })
+    );
+  }
 });

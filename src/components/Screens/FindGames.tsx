@@ -21,7 +21,6 @@ const FindGames = () => {
         let games: any[] = [];
         docs.forEach((doc) => {
           let agame = doc.data();
-
           if(agame.waiting)
           games.push({ ...agame, gid: doc.id });
         });
@@ -84,8 +83,8 @@ const FindGames = () => {
       <div id="gamelist">
         {games.length > 0 ?
           //@ts-ignore
-          games.map((e: any) => (
-            <div id="usergame" onClick={()=>{setConfirm(true); setChosen(e)}}>
+          games.map((e: any, i:number) => (
+            <div key={i} id="usergame" onClick={()=>{setConfirm(true); setChosen(e)}}>
               <div id="usershow">
                 <img src={e.photo} alt="user" />
                 <span>{e.uname}</span>

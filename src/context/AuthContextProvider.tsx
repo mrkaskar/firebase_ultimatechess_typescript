@@ -30,7 +30,13 @@ export const AuthContextProvider = ({children}:{children:React.ReactNode}) => {
       auth.onAuthStateChanged(async (user)=>{
           clearTimeout(timeout);
           if(user){
-              let savedUser = await getUser(user.uid);
+              let savedUser;
+              try{
+                  savedUser = await getUser(user.uid);
+              }
+              catch(e){
+                  console.log(e.message)
+              }
               setTheme(decideTheme(savedUser?.theme));
               //@ts-ignore
               setUser(savedUser);
@@ -56,10 +62,13 @@ export const AuthContextProvider = ({children}:{children:React.ReactNode}) => {
               setUser(undefined);
               setTimeout(()=>{
                  setLoading(false);
-              },5000);
+              },3000);
           }
       },(error) => {
           setUser(undefined)
+              setTimeout(()=>{
+                 setLoading(false);
+              },3000);
         }); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])

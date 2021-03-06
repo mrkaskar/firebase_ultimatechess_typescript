@@ -37,7 +37,9 @@ const useStatus = (game: ChessInstance, fen: string) => {
     return {
         check, 
         checkMate,
-        draw
+        draw,
+        setCheckMate,
+        setDraw,
     }
 }
 

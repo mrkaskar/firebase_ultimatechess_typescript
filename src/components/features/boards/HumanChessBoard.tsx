@@ -74,7 +74,7 @@ const HumanChessBoard = ({
     dbu1,
   };
 
-  const { checkMate, draw } = useStatus(game, fen);
+  const { checkMate, draw, setCheckMate, setDraw } = useStatus(game, fen);
   const [lastPlayer, setLastPlayer] = React.useState("b");
   
   const [drawOffer, setDrawOffer] = React.useState<"w" | "b" | "" | "d">("");
@@ -94,10 +94,12 @@ const HumanChessBoard = ({
     if(checkMate){
       endGame(gid, lastPlayer === "b" ? "Black is in Checkmate!" : "White is in Checkmate!");
       game.reset();
+      setCheckMate(false);
     }
     else if(draw){
       endGame(gid, draw);
       game.reset();
+      setDraw("");
     }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -158,7 +160,6 @@ const HumanChessBoard = ({
   const gameRefresh = React.useRef(false);
   React.useEffect(() => {
     listenAmove(gid).on("value", (snap) => {
-      console.log("Trigger!")
       const data = snap.val();
       if (data) {
         if(data.fen){
