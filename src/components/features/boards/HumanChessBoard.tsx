@@ -93,17 +93,12 @@ const HumanChessBoard = ({
   React.useEffect(()=>{
     if(checkMate){
       endGame(gid, lastPlayer === "w" ? "Black is in Checkmate!" : "White is in Checkmate!");
-      game.reset();
-      setCheckMate(false);
     }
     else if(draw){
       endGame(gid, draw);
-      game.reset();
-      setDraw("");
     }
-    
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[lastPlayer])
+  },[checkMate, draw, lastPlayer])
 
 
   let { onDrop, onSquareClick } = useHuman(
@@ -192,6 +187,10 @@ const HumanChessBoard = ({
         }
         if(data.gameEnd){
           setDrawOffer("");
+          game.reset();
+          setgameEnd("");
+          setDraw("");
+          setCheckMate(false);
           setgameEnd(data.gameEnd);
         }
         if(data.player){

@@ -1,3 +1,4 @@
+import React from 'react';
 import useAuth from "../../hooks/useAuth";
 import useTheme from "../../hooks/useTheme";
 
@@ -25,4 +26,4 @@ const HomeNav = () => {
   );
 };
 
-export default HomeNav;
+export default React.memo(HomeNav);

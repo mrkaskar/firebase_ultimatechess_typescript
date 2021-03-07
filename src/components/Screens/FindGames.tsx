@@ -16,8 +16,9 @@ const FindGames = () => {
   const auth = useAuth();
   const history = useHistory();
   React.useEffect(() => {
+    let unsubscribe:any;
     if (auth?.user) {
-      gameObserver(auth.user.uid).onSnapshot((docs) => {
+      unsubscribe = gameObserver(auth.user.uid).onSnapshot((docs) => {
         let games: any[] = [];
         docs.forEach((doc) => {
           let agame = doc.data();
@@ -29,6 +30,7 @@ const FindGames = () => {
     });
     setLoading(false);
     }
+    return () => {if(unsubscribe){ unsubscribe() }};
   }, [auth?.user]);
 
   React.useEffect(()=>{

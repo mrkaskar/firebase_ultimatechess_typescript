@@ -38,7 +38,7 @@ const useModal = (checkMate:boolean, draw: string, user:User, win:boolean, gameE
             return;
         }
         
-       if(checkMate) {
+       if(checkMate && !gameEnd) {
            setShowModal(true);
            const status = {
                title:'Checkmate!',
