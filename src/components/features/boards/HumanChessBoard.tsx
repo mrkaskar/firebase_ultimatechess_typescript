@@ -92,7 +92,7 @@ const HumanChessBoard = ({
 
   React.useEffect(()=>{
     if(checkMate){
-      endGame(gid, lastPlayer === "w" ? "Black is in Checkmate!" : "White is in Checkmate!");
+      endGame(gid, lastPlayer === "w" ? "White is in Checkmate!" : "Black is in Checkmate!");
     }
     else if(draw){
       endGame(gid, draw);
