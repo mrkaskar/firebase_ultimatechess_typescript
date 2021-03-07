@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import { getGame, getPlayGame, getUserGame } from '../../lib/db';
 import HumanChessBoard from '../features/boards/HumanChessBoard';
 import Loading from './Loading';
+import { disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
 
 interface User {
     username:string;
@@ -40,6 +41,21 @@ const HvHGame = () => {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
+
+const target = React.useRef(null);
+   
+   React.useEffect(()=>{
+       let ele:any;
+       if(target.current){
+        ele = target.current;
+        //@ts-ignore
+        disableBodyScroll(ele);
+       }
+        //@ts-ignore
+        return () => {if(ele) enableBodyScroll(ele) };
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[target.current])
+
     React.useEffect(() => {
 if(loaded && gameid && auth?.user.uid){
           getGame(gameid).then(r => {
@@ -82,10 +98,10 @@ if(loaded && gameid && auth?.user.uid){
     if(!oren) return <Loading/>
 
     return (
-    <>
+    <div ref={target}>
 <HumanChessBoard orentationBoard={oren} u1={user1} u2 ={user2} gid={gameid} dbu1={dbu1}/>
 
-    </>
+    </div>
     )
 }
 
