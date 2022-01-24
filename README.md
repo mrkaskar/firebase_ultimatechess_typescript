@@ -26,7 +26,7 @@ These challenges are solved as below.
 ![This is an image](https://i.ibb.co/QFtyxr3/screenbud-426e6cc8-d84c-408f-a709-df1d29159341.png)
 
 ***Enjoy Bot Game***
-![This is an image](https://i.ibb.co/HnYVfTZ/screenbud-eb53c34c-de4d-40c4-9fbf-24edf423d125.png)
+![This is an image](https://i.ibb.co/bzLPM5t/screenbud-eb53c34c-de4d-40c4-9fbf-24edf423d125.png)
 
 ***Create Online Game***
 ![This is an image](https://i.ibb.co/LQ3vQq1/screenbud-b45692ea-af39-4aff-9c0c-3e62351798c6.png)
