@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Serverless firebase multiplayer chess PWA
+### Features
+1. Play with computer bots according to different difficulty 
+2. Create chess game room with time and color
+3. Join the created game room
+4. Play chess in real time
+5. Change multiple color board theme
+6. Login with Google
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Challenges
+1. Chess player time synchronization in serverless environment
+2. Stockfish engine level is too high for beginner even with 0 difficulty
+3. Bot thinking process is blocking the javascript thread (hanging the whole app)
+These challenges are solved as below.
 
-## Available Scripts
+### Solving Challenges
+1. One player record the other player time taken in the firestore
+2. Using js-chess-engine for beginner chess players in addition to stockfish engine. 
+3. Make all chess engine process to be "workers" to process behind with another thread 
 
-In the project directory, you can run:
+### Some Screenshots
+***Choose a bot to play with***
+![This is an image](https://i.ibb.co/qxy67Dr/screenbud-8a3665ab-e6a9-43d8-86ba-083072cec4a1.png)
 
-### `yarn start`
+***Choose color to play***
+![This is an image](https://i.ibb.co/QFtyxr3/screenbud-426e6cc8-d84c-408f-a709-df1d29159341.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***Enjoy Bot Game***
+![This is an image](https://i.ibb.co/HnYVfTZ/screenbud-eb53c34c-de4d-40c4-9fbf-24edf423d125.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+***Create Online Game***
+![This is an image](https://i.ibb.co/LQ3vQq1/screenbud-b45692ea-af39-4aff-9c0c-3e62351798c6.png)
 
-### `yarn test`
+***Wait for other player to join***
+![This is an image](https://i.ibb.co/rmRWTd2/screenbud-4a459543-6ee2-4ab3-9ac3-2adc7da35a81.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+***Other player can see and join the game***
+![This is an image](https://i.ibb.co/82wWhYn/screenbud-c397bdea-a432-4d82-b27f-f197bb1f4206.png)
 
-### `yarn build`
+***Enjoy the game real time***
+![This is an image](https://i.ibb.co/nQcwRj5/screenbud-2cc7f298-16ff-4ce5-962c-ca2949027a3e.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+***Change theme, name and photo***
+![This is an image](https://i.ibb.co/VT28RD8/screenbud-04b3c43a-694b-47b7-a6fe-d2e8899abb13.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+***Install as Progressive Web Application***
+![This is an image](https://i.ibb.co/fS5tvtC/screenbud-098562ea-5e25-40a1-b3ee-778f1f5a73b7.png)
