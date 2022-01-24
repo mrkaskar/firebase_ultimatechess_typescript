@@ -1,8 +1,11 @@
 # Serverless firebase multiplayer chess PWA
 ## Tech Stack
 > React
+
 > Typescript
+
 > Firestore
+
 > Realtime firebase
 
 ### Features
