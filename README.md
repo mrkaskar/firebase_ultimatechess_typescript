@@ -1,4 +1,10 @@
 # Serverless firebase multiplayer chess PWA
+## Tech Stack
+> React
+> Typescript
+> Firestore
+> Realtime firebase
+
 ### Features
 1. Play with computer bots according to different difficulty 
 2. Create chess game room with time and color
