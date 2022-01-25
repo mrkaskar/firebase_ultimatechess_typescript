@@ -1,4 +1,8 @@
 # Serverless firebase multiplayer chess PWA
+### Skill level
+**UXUI** - Medium 
+
+**Coding** - Medium
 ## Tech Stack
 > React
 
